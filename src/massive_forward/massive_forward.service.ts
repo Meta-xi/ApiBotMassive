@@ -52,7 +52,7 @@ export class MassiveForwardService {
     // Enviar media a WhatsApp
     async sendMediaToWhatsapp(groupId: string, instanceName: string, urlImage: string, caption: string) {
         Logger.log('Enviando Mensaje con archivo multimedia');
-        Logger.log(`http://localhost:3000/public/${urlImage}`)
+        Logger.log(`https://apibotmassive-production.up.railway.app/public/${urlImage}`)
         const response = await fetch(`https://evolution-api-production-22e8.up.railway.app/message/sendMedia/${instanceName}`, {
             method: 'POST',
             headers: { 'apikey': 'PingaPalComunismo', 'Content-Type': 'application/json' },
@@ -61,7 +61,7 @@ export class MassiveForwardService {
                 mediatype: 'image',
                 mimetype: 'image/jpeg',
                 caption,
-                media: `http://localhost:3000/public/${urlImage}`,
+                media: `https://apibotmassive-production.up.railway.app/public/${urlImage}`,
                 fileName: '',
                 delay: 3000
             })
