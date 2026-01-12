@@ -15,12 +15,13 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
-  const datasource = app.get(DataSource);
-  await datasource.runMigrations();
+  /* const datasource = app.get(DataSource);
+  await datasource.runMigrations(); */
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document , swaggerOptions);
 
-  const port = process.env.PORT ?? 3000; 
+  
+  const port = Number(process.env.PORT);
   
  await app.listen(port, '0.0.0.0'/* () => {
     const url = `http://localhost:${port}/api`;
@@ -34,5 +35,6 @@ async function bootstrap() {
       }
     });
   } */);
+  console.log(`Listening on ${port}`);
 }
 bootstrap();
