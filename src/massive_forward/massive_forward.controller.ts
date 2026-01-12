@@ -10,12 +10,12 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 export class MassiveForwardController {
   constructor(private readonly massiveForwardService: MassiveForwardService) {
   }
-/*   @UseGuards(JwtAuthGuard) */
+  @UseGuards(JwtAuthGuard)
   @Get('getGroups/:instanceName')
   async getgroups(@Param('instanceName') instanceName : string){
     return await this.massiveForwardService.getGrups(instanceName);
   }
-/*   @UseGuards(JwtAuthGuard) */
+  @UseGuards(JwtAuthGuard)
   @Post('createConfig')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('imagen'))

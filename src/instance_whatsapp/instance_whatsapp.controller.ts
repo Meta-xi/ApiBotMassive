@@ -7,7 +7,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 @Controller('instance-whatsapp')
 export class InstanceWhatsappController {
   constructor(private readonly instanceWhatsappService: InstanceWhatsappService) {}
-/*   @UseGuards(JwtAuthGuard) */
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createInstanceWhatsappDto: CreateInstanceWhatsappDto) {
     return await this.instanceWhatsappService.create(createInstanceWhatsappDto);
@@ -42,7 +42,7 @@ export class InstanceWhatsappController {
   async DeleteInstance(@Param('instanceName')instanceName : string){
     return await this.instanceWhatsappService.delete_instance(instanceName);
   }
-/*   @UseGuards(JwtAuthGuard) */
+  @UseGuards(JwtAuthGuard)
   @Get(':idUserTelegram')
   async FindTheName(@Param('idUserTelegram', ParseIntPipe)idUserTelegram : number){
     return await this.instanceWhatsappService.findInstanceByIdUserTelegram(idUserTelegram);
