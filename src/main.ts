@@ -16,13 +16,13 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const datasource = app.get(DataSource);
-  datasource.runMigrations();
+  await datasource.runMigrations();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document , swaggerOptions);
 
-  const port = process.env.PORT ?? 3000;
+  /* const port = process.env.PORT ?? 3000; */
   
-  await app.listen(port, () => {
+  /* await app.listen(port, () => {
     const url = `http://localhost:${port}/api`;
     console.log(`Application is running on: http://localhost:${port}`);
     console.log(`Swagger documentation is available at: ${url}`);
@@ -33,6 +33,6 @@ async function bootstrap() {
         console.log('No se pudo abrir el navegador automáticamente');
       }
     });
-  });
+  }); */
 }
 bootstrap();
