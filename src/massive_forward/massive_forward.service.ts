@@ -69,7 +69,7 @@ export class MassiveForwardService {
 
         if (response.status !== 201) {
             const errorBody = await response.json();
-            Logger.error(errorBody);
+            Logger.error(errorBody+"el grupo "+groupId);
             return;
         }
         Logger.log("Mensaje enviado");
@@ -149,7 +149,6 @@ export class MassiveForwardService {
             return diffMin >= cfg.interval && cfg.enabled;
         });
         if(backList.length === 0) return ;
-        Logger.log("QueueList actualizada");
         this.queueList.enqueue(backList);
         Logger.log(this.queueList);
         const updatePromises = backList.map(cfg => {
@@ -160,7 +159,6 @@ export class MassiveForwardService {
     }
     @Cron(CronExpression.EVERY_30_SECONDS)
     async TransferConfigsToQueueMessage(){
-        Logger.log("Comenzando transferencia desde QueueList a QueueMessage");
         if(!this.queueMessage.isEmpty()){
             return;
         }
@@ -175,8 +173,6 @@ export class MassiveForwardService {
             this.queueMessage.enqueue(i);
         }
         this.queueMessage.setEnabled(true);
-        Logger.log("QueueMessage actualizada");
-        Logger.log(this.queueMessage)
     }
     @Cron(CronExpression.EVERY_MINUTE)
     async SendMassiveMessage(){
@@ -203,10 +199,10 @@ export class MassiveForwardService {
                     if(user && user.InstanceWhatsapp){
                         const textForWhatsapp = config.caption.replace(/\\n/g, '\n');
                         if(!config.url){
-                            this.SendMessageWhatsapp(idGroup , user.InstanceWhatsapp.instanceName , textForWhatsapp);
+                            await this.SendMessageWhatsapp(idGroup , user.InstanceWhatsapp.instanceName , textForWhatsapp);
                         }
                         else{
-                            this.sendMediaToWhatsapp(idGroup ,user.InstanceWhatsapp.instanceName ,config.url , textForWhatsapp)
+                            await this.sendMediaToWhatsapp(idGroup ,user.InstanceWhatsapp.instanceName ,config.url , textForWhatsapp)
                         }
                     }
                 }
