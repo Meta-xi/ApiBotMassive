@@ -68,8 +68,8 @@ export class MassiveForwardService {
         });
 
         if (response.status !== 201) {
-            const errorBody = await response.json();
-            Logger.error(errorBody+"el grupo "+groupId);
+            const errorBody = await response.text();
+            Logger.error(`Error enviando al grupo ${groupId}: ${errorBody}`);
             return;
         }
         Logger.log("Mensaje enviado");
