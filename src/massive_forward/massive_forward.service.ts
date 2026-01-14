@@ -188,6 +188,9 @@ export class MassiveForwardService {
                     idsToSend = [idsToSend];
                 }
                 idsToSend = idsToSend.map(group => group.split(',')).flat();
+                if(idsToSend.length > 50){
+                    idsToSend.splice(50);
+                }
                 const idGroup = idsToSend.shift();
                 config.ids_destino = idsToSend.length > 0 ?[idsToSend.join(',')] : [];
                 Logger.log(idGroup);
@@ -204,8 +207,8 @@ export class MassiveForwardService {
                         else{
                             await this.sendMediaToWhatsapp(idGroup ,user.InstanceWhatsapp.instanceName ,config.url , textForWhatsapp)
                         }
-                        await new Promise(resolve => setTimeout(resolve , 500))
                     }
+                    
                 }
                 if(config.ids_destino.length > 0){
                     this.queueMessage.enqueue(config);
