@@ -204,6 +204,7 @@ export class MassiveForwardService {
                         else{
                             await this.sendMediaToWhatsapp(idGroup ,user.InstanceWhatsapp.instanceName ,config.url , textForWhatsapp)
                         }
+                        await new Promise(resolve => setTimeout(resolve , 500))
                     }
                 }
                 if(config.ids_destino.length > 0){
