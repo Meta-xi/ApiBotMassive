@@ -191,6 +191,7 @@ export class MassiveForwardService {
                 if(idsToSend.length > 50){
                     idsToSend.splice(50);
                 }
+                
                 const idGroup = idsToSend.shift();
                 config.ids_destino = idsToSend.length > 0 ?[idsToSend.join(',')] : [];
                 Logger.log(idGroup);
