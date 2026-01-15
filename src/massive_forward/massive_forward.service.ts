@@ -188,8 +188,8 @@ export class MassiveForwardService {
                     idsToSend = [idsToSend];
                 }
                 idsToSend = idsToSend.map(group => group.split(',')).flat();
-                if(idsToSend.length >= 3){
-                    idsToSend.splice(3);
+                if(idsToSend.length >= 1){
+                    idsToSend.splice(1);
                 }
 
                 const idGroup = idsToSend.shift();
